@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To do list</title>
+  <style>
+    body{
+      margin: 0px;
+      padding: 0px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    .container{
+      background-color: rgb(203, 10, 10);
+      max-width: 80%;
+      margin: 80px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 5px 6px 29px rgb(197, 184, 84);
+    }
+    h1{
+      color: aliceblue;
+    }
+    input{
+      width: 65%;
+      padding: 8px;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 8px;
+      outline: none;
+    }
+    button{
+      color: aliceblue;
+      background-color: olive;
+      width: 50px;
+      height: 35px;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover{
+      background-color: blueviolet;
+      transition: 0.3s;
+    }
+    ul{
+      list-style-type: none;
+      padding: 0px;
+      margin-top: 20px;
+    }
+    li{
+      background-color: khaki;
+      max-width: 80%;
+      margin: 49px auto;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li.done{
+      text-decoration: line-through;
+      color: white;
+      background-color: brown;
+    }
+    .delete-btn{
+      background-color: turquoise;
+      color: purple;
+      padding: 5px 10px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text">To do list</h1>
+    <input type="text" id="david" placeholder="add task">
+    <button onclick="addtask()">add</button>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    function addtask(){
+      let input = document.getElementById("david");
+      let musa = input.value.trim();
+
+      if(musa === "") return; // prevent empty tasks
+
+      let li = document.createElement("li");
+      li.textContent = musa;
+
+      // toggle done
+      li.onclick = function() {
+        this.classList.toggle("done");  
+      };
+
+      // delete button
+      let delbtn = document.createElement('button');
+      delbtn.textContent = 'done';
+      delbtn.className = 'delete-btn';
+      delbtn.onclick = function(e){
+        e.stopPropagation();
+        li.remove();
+      }
+
+      li.appendChild(delbtn);
+      document.getElementById("list").appendChild(li);
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
